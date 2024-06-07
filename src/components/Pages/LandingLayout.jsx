@@ -6,6 +6,32 @@ import '../../App.css'; // Adjust the path to App.css based on its location
 const LandingLayout = () => {
     const [animateCards, setAnimateCards] = useState(false);
 
+    /**
+     * 
+     * =======
+               <div className="title-container">
+          <Link to="/dashboard">
+            <div style={{ display: 'inline-block' }}>
+              <h3 style={{ color: 'black', fontSize: '25px', fontWeight: 200, margin: '0 2rem', display: 'inline-block' }}>
+                Click Here To Get All Backend Data... 
+              </h3>
+              <img src="assets/Enter.png" alt="Enter" style={{ width: '50px', height: '60px', verticalAlign: 'middle' }} />
+            </div>
+          </Link>
+        </div>
+                <div className="title-container">
+          <Link to="/dashboard">
+            <div style={{ display: 'inline-block' }}>
+            <h3 style={{ color: 'black', fontSize: '25px', fontWeight: 200, margin: '0 2rem', display: 'inline-block' }}>
+                Click Here To Get Data For Population Projection... 
+              </h3>
+              <img src="assets/Enter.png" alt="Enter" style={{ width: '50px', height: '60px', verticalAlign: 'middle' }} />
+            </div>
+          </Link>
+        </div>
+>>>>>>> ec4f758b247cf3130dab874acc2866f752880904
+     */
+
     useEffect(() => {
         setAnimateCards(true);
     }, []);
@@ -66,7 +92,6 @@ const LandingLayout = () => {
                         />
                     </Link>
                 </div>
-<<<<<<< HEAD
                 <div className='title-container'>
                     <Link to='/dashboard'>
                         <div style={{ display: 'inline-block' }}>
@@ -93,28 +118,6 @@ const LandingLayout = () => {
                         </div>
                     </Link>
                 </div>
-=======
-               <div className="title-container">
-          <Link to="/dashboard">
-            <div style={{ display: 'inline-block' }}>
-              <h3 style={{ color: 'black', fontSize: '25px', fontWeight: 200, margin: '0 2rem', display: 'inline-block' }}>
-                Click Here To Get All Backend Data... 
-              </h3>
-              <img src="assets/Enter.png" alt="Enter" style={{ width: '50px', height: '60px', verticalAlign: 'middle' }} />
-            </div>
-          </Link>
-        </div>
-                <div className="title-container">
-          <Link to="/dashboard">
-            <div style={{ display: 'inline-block' }}>
-            <h3 style={{ color: 'black', fontSize: '25px', fontWeight: 200, margin: '0 2rem', display: 'inline-block' }}>
-                Click Here To Get Data For Population Projection... 
-              </h3>
-              <img src="assets/Enter.png" alt="Enter" style={{ width: '50px', height: '60px', verticalAlign: 'middle' }} />
-            </div>
-          </Link>
-        </div>
->>>>>>> ec4f758b247cf3130dab874acc2866f752880904
                 <Outlet />{' '}
                 {/* This is where the routed components will be rendered */}
             </main>

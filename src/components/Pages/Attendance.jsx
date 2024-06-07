@@ -52,7 +52,7 @@ const Attendance = () => {
         event.preventDefault();
         // Handle form submission here
         const data = {
-            fullName,
+            fullname: fullName,
             date: currentDate,
             time: currentTime,
             lat: location.latitude,
