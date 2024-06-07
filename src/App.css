@@ -183,6 +183,7 @@ main .p {
 footer {
   background: linear-gradient(135deg, #1A374D, #2CB67D);
   color: white;
+  margin-top: 5rem;
   padding: 20px 0;
   text-align: center;
 }
