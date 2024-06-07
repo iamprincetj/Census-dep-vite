@@ -1,0 +1,247 @@
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Source Serif Pro, serif:wght@300&display=swap');
+
+body {
+  font-family: 'Source Serif Pro', serif;
+  background: linear-gradient(135deg, #ffffff, #b3f7e3, #f6f6eb);
+  backdrop-filter: blur(20px);
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+ background: linear-gradient(135deg, #1A374D, #2CB67D);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: white;
+}
+
+.signup-button {
+  background-color: #1A374D; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px 3px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}
+
+.title-container {
+  margin-top: 1rem; /* Adjust as needed */
+}
+
+.card-container {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.item{
+  flex-grow: 1;
+  flex-basis: 200;
+}
+
+.card {
+  background: #ecf9ea;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 200px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+a.card-link {
+  text-decoration: none;
+}
+
+.card h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1em;
+  color: #333;
+}
+
+.card img {
+  max-width: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+  vertical-align: top;
+  transition: all 0.3s ease;
+}
+
+.card:hover img {
+  zoom: 1;
+  filter: alpha(opacity=20);
+  opacity: 0.3;
+}
+
+.card:hover .corner::before {
+  width: 40px;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.card:hover .corner::after {
+  height: 40px;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.card:hover h3 {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+.card:hover p {
+  opacity: 1;
+  transition-delay: 0.35s;
+}
+
+/* Add these styles to your existing CSS */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+form {
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  max-width: 500px; /* Optional: set a max width for the form */
+}
+
+
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+}
+
+.location-info {
+  display: flex;
+  align-items: flex-start;
+  font-size: 13px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.submit-btn input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+main .p {
+  font-size: 28px; /* Adjust the font size as needed */
+}
+
+footer {
+  background: linear-gradient(135deg, #1A374D, #2CB67D);
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footer-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .card {
+    width: auto; /* Adjust as needed */
+  }
+}
+
+/* Additional styles for smaller screens */
+@media screen and (max-width: 767px) {
+  .card {
+    width: 100%; /* Adjust as needed */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .App-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-button {
+    margin-top: 10px;
+  }
+}

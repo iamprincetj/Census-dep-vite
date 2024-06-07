@@ -1,0 +1,190 @@
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300&display=swap');
+
+body {
+  font-family: 'Source Serif Pro', serif;
+  background-color: #ebf4ef;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background: linear-gradient(135deg, #1A374D, #2CB67D);
+  padding: 20px;
+  color: white;
+}
+
+.title-container {
+  margin-bottom: 2rem; /* Adjust as needed */
+}
+
+.card-container {
+  display: flex;
+  justify-content: center; /* Center the cards horizontally */
+  flex-wrap: wrap;
+  gap: 20px; /* Add spacing between the cards */
+  padding: 20px;
+}
+
+.card {
+  background: #ecf9ea;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1em;
+  color: #333;
+}
+
+.card img {
+  max-width: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+  vertical-align: top;
+  transition: all 0.3s ease;
+}
+
+.card:hover img {
+  zoom: 1;
+  filter: alpha(opacity=20);
+  opacity: 0.3;
+}
+
+.card:hover .corner::before {
+  width: 40px;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.card:hover .corner::after {
+  height: 40px;
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+.card:hover h3 {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+.card:hover p {
+  opacity: 1;
+  transition-delay: 0.35s;
+}
+
+form {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  margin-top: 20rem;
+}
+
+.location-info {
+  display: flex;
+  align-items: flex-start;
+  font-size: 13px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.submit-btn input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+footer {
+  background: linear-gradient(135deg, #1A374D, #2CB67D);
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content p {
+  margin-bottom: 10px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.footer-links li:last-child {
+  margin-right: 0;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    width: 45%; /* Adjust as needed */
+    margin: 1%; /* Adjust as needed */
+  }
+}
+
+/* Additional styles for smaller screens */
+@media screen and (max-width: 767px) {
+  .card {
+    width: 90%; /* Adjust as needed */
+    margin: 2%; /* Adjust as needed */
+  }
+}
