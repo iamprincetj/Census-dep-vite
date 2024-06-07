@@ -20,6 +20,16 @@ const Request = () => {
         if (formattedDate) {
             setDate(formattedDate);
         }
+
+        // sets the initial value of the select elements
+        const state = document.getElementById('state');
+        setState(state.options[state.selectedIndex].textContent);
+
+        const status = document.getElementById('status');
+        setStatus(status.options[status.selectedIndex].textContent);
+
+        const gender = document.getElementById('gender');
+        setGender(gender.options[gender.selectedIndex].textContent);
     }, []);
 
     const handleSubmit = async (e) => {
@@ -103,7 +113,6 @@ const Request = () => {
                     <label htmlFor='state'>State</label>
                     <select
                         id='state'
-                        value={state}
                         onChange={({ target }) =>
                             setState(
                                 target.options[target.selectedIndex].textContent
@@ -185,7 +194,6 @@ const Request = () => {
                     <label htmlFor='status'>Status</label>
                     <select
                         id='status'
-                        value={status}
                         onChange={({ target }) =>
                             setStatus(
                                 target.options[target.selectedIndex].textContent
@@ -205,7 +213,6 @@ const Request = () => {
                     <label htmlFor='gender'>Gender</label>
                     <select
                         id='gender'
-                        value={gender}
                         onChange={({ target }) =>
                             setGender(
                                 target.options[target.selectedIndex].textContent

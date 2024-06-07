@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './mail.css';
-import formattedDate from '../../script2';
-import callUpdateTime, { updateTime } from '../../script3';
 import { createMail } from '../../services/mailService';
+import { getCurrentTime } from './time';
+import { getCurrentDate } from './date';
 
 const Mail = () => {
     const [referenceId, setReferenceId] = useState('');
@@ -11,21 +11,31 @@ const Mail = () => {
     const [category, setCategory] = useState('');
     const [sender, setSender] = useState('');
     const [request, setRequest] = useState('');
-    const [mailDate, setDate] = useState('');
-
-    console.log(department);
+    const mailDate = getCurrentDate();
+    const [time, setCurrentTime] = useState('');
 
     useEffect(() => {
-        if (formattedDate) {
-            setDate(formattedDate);
-        }
+        // Update the time every second
+        const interval = setInterval(() => {
+            const time = getCurrentTime();
+            setCurrentTime(time);
+        }, 5000);
+
+        // sets the initial value of select element
+
+        const department = document.getElementById('department');
+        setDepartment(department.options[department.selectedIndex].textContent);
+
+        const category = document.getElementById('category');
+        setCategory(category.options[category.selectedIndex].textContent);
+
+        // Cleanup interval on component unmount
+        return () => clearInterval(interval);
     }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Handle form submission logic here
-
-        const time = updateTime();
 
         const data = {
             referenceId,
@@ -69,7 +79,7 @@ const Mail = () => {
                     <label>DEPARTMENT</label>
                     <select
                         name='department'
-                        value={'department'}
+                        id='department'
                         onChange={({ target }) =>
                             setDepartment(
                                 target.options[target.selectedIndex].textContent
@@ -126,7 +136,7 @@ const Mail = () => {
                     <label>Category</label>
                     <select
                         name='category'
-                        value={category}
+                        id='category'
                         onChange={({ target }) => setCategory(target.value)}
                     >
                         <option value='' disabled>
@@ -169,6 +179,7 @@ const Mail = () => {
                     <input
                         type='text'
                         name='time'
+                        value={time && time}
                         id='time'
                         placeholder='Current time'
                         disabled
@@ -179,7 +190,6 @@ const Mail = () => {
                     <input type='submit' value='Submit' />
                 </div>
             </form>
-            {document.getElementById('time') && callUpdateTime()}
         </div>
     );
 };

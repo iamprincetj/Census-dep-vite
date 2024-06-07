@@ -1,9 +1,15 @@
+import { useEffect, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import Card from '../Card'; // Ensure the Card component path is correct
 import '../../App.css'; // Adjust the path to App.css based on its location
 
 const LandingLayout = () => {
-    // Renamed the component to LandingLayout
+    const [animateCards, setAnimateCards] = useState(false);
+
+    useEffect(() => {
+        setAnimateCards(true);
+    }, []);
+
     return (
         <div className='App'>
             <header className='App-header'>
@@ -30,7 +36,11 @@ const LandingLayout = () => {
                         management and mail tracking
                     </h3>
                 </div>
-                <div className='card-container'>
+                <div
+                    className={`card-container ${
+                        animateCards ? 'animate' : ''
+                    }`}
+                >
                     <Link to='/attendance' className='card-link'>
                         <Card
                             imgSrc='/assets/attendance.jpg'
@@ -68,7 +78,7 @@ const LandingLayout = () => {
                                     display: 'inline-block',
                                 }}
                             >
-                                Click Here To Get All Backend Data
+                                Click Here To Get All Backend Data...
                             </h3>
                             <img
                                 src='assets/Enter.png'
@@ -106,4 +116,4 @@ const LandingLayout = () => {
     );
 };
 
-export default LandingLayout; // Export the component
+export default LandingLayout;

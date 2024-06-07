@@ -54,8 +54,15 @@ body {
   gap: 20px;
   padding: 20px;
   flex-wrap: wrap;
-  
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease-in-out;
+}
+
+.card-container.animate {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .item{

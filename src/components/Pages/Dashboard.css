@@ -1,23 +1,32 @@
-body {
+body, html {
+  height: 100%;
+  margin: 0;
   font-family: 'Source Serif Pro', serif;
-  background: linear-gradient(135deg, #ffffff, #b3f7e3, #f6f6eb);
-  backdrop-filter: blur(20px);
-  background-size: cover;
-  background-position: center;
-  justify-content: center;
-  align-items: center;
+  background-color: #e0eff6;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+
+.container {
+  flex: 1;
+  width: 80%;
+  margin: 100px auto 2rem auto; /* Adjusted margin to avoid overlap with fixed navbar */
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .heading-primary {
   color: black;
   text-align: center;
-  font-weight: 35px;
+  font-size: 35px;
+  font-weight: bold;
 }
 
 .heading-secondary {
@@ -54,53 +63,53 @@ body {
 }
 
 footer {
-  background: linear-gradient(135deg, #1A374D, #2CB67D);
-  color: white;
-  padding: 20px 0;
+  color: #fff;
+  padding: 1rem 0;
   text-align: center;
+  flex-shrink: 0;
 }
 
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
+.bottom-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.footer-content p {
-  margin-bottom: 10px;
+.bottom-details .bottom_text {
+  max-width: 1250px;
+  margin: auto;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.footer-links {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.footer-links li:last-child {
-  margin-right: 0;
-}
-
-.footer-links a {
-  color: white;
+.bottom-details .bottom_text span,
+.bottom-details .bottom_text a {
+  font-size: 14px;
+  font-weight: 300;
+  color: #fff;
+  opacity: 0.8;
   text-decoration: none;
 }
 
-.footer-links a:hover {
+.bottom-details .bottom_text a:hover {
+  opacity: 1;
   text-decoration: underline;
 }
 
-/* Media query for smaller screens */
+.bottom-details .bottom_text a {
+  margin-right: 10px;
+}
+
 @media (max-width: 600px) {
   .heading-secondary {
-      font-size: 18px;
-      margin: 0 1rem;
+    font-size: 18px;
+    margin: 0 1rem;
   }
 
   .container {
-      width: 95%;
-      padding: 1rem;
+    width: 95%;
+    padding: 1rem;
   }
 }

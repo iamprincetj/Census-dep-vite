@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './LoginSignup.css';
 
 const LoginPage = () => {
@@ -17,6 +18,7 @@ const LoginPage = () => {
         <div className="form-group submit-btn">
           <input type="submit" value="Login" />
         </div>
+        <Link to="/signup">Sign Up</Link>
       </form>
     </div>
   );
