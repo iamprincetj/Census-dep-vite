@@ -3,6 +3,7 @@ import './request.css';
 import formattedDate from '../../script2';
 import callUpdateTime, { updateTime } from '../../script3';
 import { makeRequest } from '../../services/requestService';
+import { getCurrentDate } from './date';
 
 const Request = () => {
     const [fullname, setFullname] = useState('');
@@ -18,7 +19,7 @@ const Request = () => {
 
     useEffect(() => {
         if (formattedDate) {
-            setDate(formattedDate);
+            setDate(getCurrentDate());
         }
 
         // sets the initial value of the select elements
@@ -37,22 +38,25 @@ const Request = () => {
 
         const time = updateTime();
 
-        const data = {
-            fullname,
-            phoneNumber,
-            address,
-            email,
-            state,
-            LGA,
-            date,
-            time,
-            status,
-            gender,
-            userRequest,
-        };
+        try {
+            const data = {
+                fullname,
+                phoneNumber,
+                address,
+                email,
+                state,
+                LGA,
+                date,
+                time,
+                status,
+                gender,
+                userRequest,
+            };
 
-        const request = await makeRequest(data);
-        console.log(request);
+            await makeRequest(data);
+        } catch (error) {
+            console.log(error.response.data);
+        }
     };
 
     return (

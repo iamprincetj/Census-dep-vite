@@ -21,7 +21,7 @@ export const downloadAttendance = async ({ month, format }) => {
         a.remove();
     } catch (error) {
         if (error.message === 'No attendance yet') {
-            console.log('Something went wrong');
+            alert('Something went wrong');
         }
     }
 };

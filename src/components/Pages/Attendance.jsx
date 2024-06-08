@@ -51,17 +51,20 @@ const Attendance = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // Handle form submission here
-        const data = {
-            fullname: fullName,
-            date: currentDate,
-            time: currentTime,
-            lat: location.latitude,
-            long: location.longitude,
-            posting: postingLocation,
-        };
-
-        const request = await createAttendance(data);
-        console.log(request);
+        try {
+            const data = {
+                latitude: location.latitude,
+                longitude: location.longitude,
+                fullName,
+                postingLocation,
+                currentDate,
+                currentTime,
+            };
+            await createAttendance(data);
+            alert('Attendance submitted successfully');
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

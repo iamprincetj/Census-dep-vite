@@ -37,20 +37,21 @@ const Mail = () => {
         e.preventDefault();
         // Handle form submission logic here
 
-        const data = {
-            referenceId,
-            department,
-            receiptDate,
-            category,
-            sender,
-            request,
-            mailDate,
-            time,
-        };
-
-        console.log(data);
-        const req = await createMail(data);
-        console.log(req);
+        try {
+            const data = {
+                referenceId,
+                department,
+                receiptDate,
+                category,
+                sender,
+                request,
+                mailDate,
+                time,
+            };
+            await createMail(data);
+        } catch (error) {
+            console.log(error.message.data);
+        }
     };
 
     return (
