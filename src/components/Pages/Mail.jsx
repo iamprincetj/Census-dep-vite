@@ -1,198 +1,161 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './mail.css';
-import { createMail } from '../../services/mailService';
-import { getCurrentTime } from './time';
 import { getCurrentDate } from './date';
+import { getCurrentTime } from './time';
 
 const Mail = () => {
-    const [referenceId, setReferenceId] = useState('');
-    const [department, setDepartment] = useState('');
-    const [receiptDate, setReceiptDate] = useState('');
-    const [category, setCategory] = useState('');
-    const [sender, setSender] = useState('');
-    const [request, setRequest] = useState('');
-    const mailDate = getCurrentDate();
-    const [time, setCurrentTime] = useState('');
+  const [error, setError] = useState(null);
+  const [currentDate, setCurrentDate] = useState(getCurrentDate());
+  const [currentTime, setCurrentTime] = useState(getCurrentTime());
 
-    useEffect(() => {
-        // Update the time every second
-        const interval = setInterval(() => {
-            const time = getCurrentTime();
-            setCurrentTime(time);
-        }, 5000);
+  const [formData, setFormData] = useState({
+    referenceId: '',
+    department: '',
+    receiptDate: '',
+    category: '',
+    sender: '',
+    request: '',
+    mailDate: getCurrentDate(),
+    time: getCurrentTime(),
+  });
 
-        // sets the initial value of select element
+  useEffect(() => {
+    // Update the time every second
+    const interval = setInterval(() => {
+      const time = getCurrentTime();
+      setCurrentTime(time);
+      setFormData((prevData) => ({
+        ...prevData,
+        time: time,
+      }));
+    }, 1000);
 
-        const department = document.getElementById('department');
-        setDepartment(department.options[department.selectedIndex].textContent);
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
-        const category = document.getElementById('category');
-        setCategory(category.options[category.selectedIndex].textContent);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-        // Cleanup interval on component unmount
-        return () => clearInterval(interval);
-    }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log('Form data submitted:', formData);
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // Handle form submission logic here
-
-        try {
-            const data = {
-                referenceId,
-                department,
-                receiptDate,
-                category,
-                sender,
-                request,
-                mailDate,
-                time,
-            };
-            await createMail(data);
-        } catch (error) {
-            console.log(error.message.data);
-        }
-    };
-
-    return (
-        <div>
-            <h2></h2>
-            <form onSubmit={handleSubmit} style={{}}>
-                <div className='hero-image'>
-                    <img
-                        src='https://i.pinimg.com/736x/25/47/e4/2547e41487634d272a78471c0ae64121.jpg'
-                        alt='Hero'
-                        style={{ marginTop: '' }}
-                    />
-                </div>
-                <br />
-                <div className='form-group fullname'>
-                    <label>Reference ID</label>
-                    <input
-                        type='text'
-                        name='referenceId'
-                        placeholder='Enter issue no. of issuing dept.'
-                        value={referenceId}
-                        onChange={({ target }) => setReferenceId(target.value)}
-                    />
-                </div>
-                <div className='form-group posting'>
-                    <label>DEPARTMENT</label>
-                    <select
-                        name='department'
-                        id='department'
-                        onChange={({ target }) =>
-                            setDepartment(
-                                target.options[target.selectedIndex].textContent
-                            )
-                        }
-                    >
-                        <option value='' disabled>
-                            Select Department
-                        </option>
-                        <option value='Male'>Office of The Chairman</option>
-                        <option value='Male'>Office of The DG</option>
-                        <option value='Female'>Cartography Department</option>
-                        <option value='Male'>Population Management</option>
-                        <option value='Female'>General Services</option>
-                        <option value='Male'>Procurement</option>
-                        <option value='Female'>
-                            Secretary to the Commission
-                        </option>
-                        <option value='Female'>
-                            Human Resource Management and Administration
-                        </option>
-                        <option value='Male'>
-                            Public Relations Department
-                        </option>
-                        <option value='Female'>
-                            Vital Registration Department
-                        </option>
-                        <option value='Male'>Legal Department</option>
-                        <option value='Female'>
-                            Population Institute and Studies Department
-                        </option>
-                        <option value='Male'>
-                            Public Administration Department
-                        </option>
-                        <option value='Female'>Account Department</option>
-                        <option value='Male'>ICT Department</option>
-                        <option value='Female'>
-                            Special Duties Department
-                        </option>
-                        <option value='Female'>Other</option>
-                    </select>
-                </div>
-                <div className='form-group fullname'>
-                    <label>DATE OF RECEIPT</label>
-                    <input
-                        type='text'
-                        name='receiptDate'
-                        placeholder='Enter date of receipt'
-                        value={receiptDate}
-                        onChange={({ target }) => setReceiptDate(target.value)}
-                    />
-                </div>
-                <div className='form-group posting'>
-                    <label>Category</label>
-                    <select
-                        name='category'
-                        id='category'
-                        onChange={({ target }) => setCategory(target.value)}
-                    >
-                        <option value='' disabled>
-                            Select Category
-                        </option>
-                        <option value='Incoming'>Incoming</option>
-                        <option value='Outgoing'>Outgoing</option>
-                    </select>
-                </div>
-                <div className='form-group fullname'>
-                    <label>WHO FROM</label>
-                    <input
-                        type='text'
-                        name='sender'
-                        placeholder='Enter who mail is coming from'
-                        value={sender}
-                        onChange={({ target }) => setSender(target.value)}
-                    />
-                </div>
-                <div className='form-group'>
-                    <label htmlFor='userRequest'>Explain your request:</label>
-                    <textarea
-                        id='userRequest'
-                        value={request}
-                        onChange={({ target }) => setRequest(target.value)}
-                        placeholder='Enter your request here'
-                    ></textarea>
-                </div>
-                <div className='form-group date'>
-                    <label>Mail Date</label>
-                    <input
-                        type='date'
-                        name='mailDate'
-                        value={mailDate}
-                        disabled
-                    />
-                </div>
-                <div className='form-group time'>
-                    <label>Time</label>
-                    <input
-                        type='text'
-                        name='time'
-                        value={time && time}
-                        id='time'
-                        placeholder='Current time'
-                        disabled
-                    />
-                </div>
-                <br />
-                <div className='form-group submit-btn'>
-                    <input type='submit' value='Submit' />
-                </div>
-            </form>
+  return (
+    <div>
+      <form onSubmit={handleSubmit} style={{}}>
+        <div className="hero-image">
+          <img
+            src="https://i.pinimg.com/736x/25/47/e4/2547e41487634d272a78471c0ae64121.jpg"
+            alt="Hero"
+            style={{ marginTop: '' }}
+          />
         </div>
-    );
+        <br />
+        <div className="form-group fullname">
+          <label>Reference ID</label>
+          <input
+            type="text"
+            name="referenceId"
+            placeholder="Enter issue no. of issuing dept."
+            value={formData.referenceId}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group posting">
+          <label>DEPARTMENT</label>
+          <select
+            name="department"
+            value={formData.department}
+            onChange={handleChange}
+          >
+            <option value="" disabled>Select Department</option>
+            <option value="Office of The Chairman">Office of The Chairman</option>
+            <option value="Office of The DG">Office of The DG</option>
+            <option value="Cartography Department">Cartography Department</option>
+            <option value="Population Management">Population Management</option>
+            <option value="General Services">General Services</option>
+            <option value="Procurement">Procurement</option>
+            <option value="Secretary to the Commission">Secretary to the Commission</option>
+            <option value="Human Resource Management and Administration">Human Resource Management and Administration</option>
+            <option value="Public Relations Department">Public Relations Department</option>
+            <option value="Vital Registration Department">Vital Registration Department</option>
+            <option value="Legal Department">Legal Department</option>
+            <option value="Population Institute and Studies Department">Population Institute and Studies Department</option>
+            <option value="Public Administration Department">Public Administration Department</option>
+            <option value="Account Department">Account Department</option>
+            <option value="ICT Department">ICT Department</option>
+            <option value="Special Duties Department">Special Duties Department</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div className="form-group posting">
+          <label>CATEGORY</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+          >
+            <option value="" disabled>Select Category</option>
+            <option value="Incoming">Incoming</option>
+            <option value="Outgoing">Outgoing</option>
+          </select>
+        </div>
+        <div className="form-group fullname">
+          <label>WHO FROM</label>
+          <input
+            type="text"
+            name="sender"
+            placeholder="Enter who mail is coming from"
+            value={formData.sender}
+            onChange={handleChange}
+          />
+        </div>
+       
+
+        <div className="form-group date">
+          <label>DATE OF RECEIPT</label>
+          <input
+            type="date"
+            name="mailDate"
+            value={formData.mailDate}
+            onChange={handleChange}
+            disabled
+          />
+        </div>
+        <div className="form-group time">
+          <label>TIME</label>
+          <input
+            type="text"
+            name="time"
+            placeholder="Current time"
+            value={formData.time}
+            onChange={handleChange}
+            disabled
+          />
+        </div>
+        <div className="form-group">
+  <label htmlFor="userRequest">Explain your request:</label>
+  <textarea
+    id="userRequest"
+    value={formData.userRequest}
+    onChange={handleChange}
+    placeholder="Enter your request here"
+    style={{ width: '100%', height: '150px' }}
+  ></textarea>
+</div>
+        <br />
+        <div className="form-group submit-btn">
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
+      {error && <p className="error">{error}</p>}
+    </div>
+  );
 };
 
 export default Mail;

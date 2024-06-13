@@ -1,72 +1,43 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './request.css';
-import formattedDate from '../../script2';
-import callUpdateTime, { updateTime } from '../../script3';
-import { makeRequest } from '../../services/requestService';
 import { getCurrentDate } from './date';
 import { getCurrentTime } from './time';
 
 const Request = () => {
-    const [fullname, setFullname] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [address, setAddress] = useState('');
-    const [state, setState] = useState('');
-    const [date, setDate] = useState('');
-    const [LGA, setLGA] = useState('');
-    const [status, setStatus] = useState('');
-    const [gender, setGender] = useState('');
-    const [userRequest, setUserRequest] = useState('');
+    const [formData, setFormData] = useState({
+        fullname: '',
+        phoneNumber: '',
+        address: '',
+        email: '',
+        state: '',
+        lga: '',
+        date: getCurrentDate(),
+        time: getCurrentTime(),
+        status: '',
+        gender: '',
+        userRequest: '',
+    });
 
-    useEffect(() => {
-        if (formattedDate) {
-            setDate(getCurrentDate());
-        }
+    const handleChange = (e) => {
+        const { id, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [id]: value,
+        }));
+    };
 
-        // sets the initial value of the select elements
-        const state = document.getElementById('state');
-        setState(state.options[state.selectedIndex].textContent);
-
-        const status = document.getElementById('status');
-        setStatus(status.options[status.selectedIndex].textContent);
-
-        const gender = document.getElementById('gender');
-        setGender(gender.options[gender.selectedIndex].textContent);
-    }, []);
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        const time = getCurrentTime();
-
-        try {
-            const data = {
-                fullname,
-                phoneNumber,
-                address,
-                email,
-                state,
-                LGA,
-                date,
-                time,
-                status,
-                gender,
-                userRequest,
-            };
-
-            await makeRequest(data);
-        } catch (error) {
-            console.log(error.response.data);
-        }
+        // Handle form submission here
+        console.log('Form submitted:', formData);
     };
 
     return (
-        <div className='request'>
-            <h2></h2>
-            <form onSubmit={handleSubmit} style={{ marginTop: '' }}>
+        <div>
+            <form onSubmit={handleSubmit} style={{}}>
                 <div className='hero-image'>
                     <img
-                        src='image/data.png'
+                        src='https://i.pinimg.com/originals/d4/99/03/d49903fe1424194ee82d8720db09e154.jpg'
                         style={{ marginTop: '' }}
                         alt='Census Data'
                     />
@@ -77,8 +48,8 @@ const Request = () => {
                     <input
                         type='text'
                         id='fullname'
-                        value={fullname}
-                        onChange={({ target }) => setFullname(target.value)}
+                        value={formData.fullname}
+                        onChange={handleChange}
                         placeholder='Enter your full name'
                     />
                 </div>
@@ -87,8 +58,8 @@ const Request = () => {
                     <input
                         type='text'
                         id='phoneNumber'
-                        value={phoneNumber}
-                        onChange={({ target }) => setPhoneNumber(target.value)}
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
                         placeholder='Enter your Phone Number'
                     />
                 </div>
@@ -99,8 +70,8 @@ const Request = () => {
                     <input
                         type='text'
                         id='address'
-                        value={address}
-                        onChange={({ target }) => setAddress(target.value)}
+                        value={formData.address}
+                        onChange={handleChange}
                         placeholder='Enter your Address'
                     />
                 </div>
@@ -109,8 +80,8 @@ const Request = () => {
                     <input
                         type='text'
                         id='email'
-                        value={email}
-                        onChange={({ target }) => setEmail(target.value)}
+                        value={formData.email}
+                        onChange={handleChange}
                         placeholder='Enter your email address'
                     />
                 </div>
@@ -118,11 +89,8 @@ const Request = () => {
                     <label htmlFor='state'>State</label>
                     <select
                         id='state'
-                        onChange={({ target }) =>
-                            setState(
-                                target.options[target.selectedIndex].textContent
-                            )
-                        }
+                        value={formData.state}
+                        onChange={handleChange}
                     >
                         <option value='' disabled>
                             Select State
@@ -171,8 +139,8 @@ const Request = () => {
                     <input
                         type='text'
                         id='lga'
-                        value={LGA}
-                        onChange={({ target }) => setLGA(target.value)}
+                        value={formData.lga}
+                        onChange={handleChange}
                         placeholder='Enter LGA'
                     />
                 </div>
@@ -181,7 +149,8 @@ const Request = () => {
                     <input
                         type='date'
                         id='date'
-                        value={date && date}
+                        value={formData.date}
+                        onChange={handleChange}
                         placeholder='Select your date'
                         disabled
                     />
@@ -191,6 +160,8 @@ const Request = () => {
                     <input
                         type='text'
                         id='time'
+                        value={formData.time}
+                        onChange={handleChange}
                         placeholder='Current time'
                         disabled
                     />
@@ -199,11 +170,8 @@ const Request = () => {
                     <label htmlFor='status'>Status</label>
                     <select
                         id='status'
-                        onChange={({ target }) =>
-                            setStatus(
-                                target.options[target.selectedIndex].textContent
-                            )
-                        }
+                        value={formData.status}
+                        onChange={handleChange}
                     >
                         <option value='' disabled>
                             Status
@@ -218,11 +186,8 @@ const Request = () => {
                     <label htmlFor='gender'>Gender</label>
                     <select
                         id='gender'
-                        onChange={({ target }) =>
-                            setGender(
-                                target.options[target.selectedIndex].textContent
-                            )
-                        }
+                        value={formData.gender}
+                        onChange={handleChange}
                     >
                         <option value='' disabled>
                             Select your gender
@@ -236,15 +201,16 @@ const Request = () => {
                     <label htmlFor='userRequest'>Explain your request:</label>
                     <textarea
                         id='userRequest'
-                        value={userRequest}
-                        onChange={({ target }) => setUserRequest(target.value)}
+                        value={formData.userRequest}
+                        onChange={handleChange}
                         placeholder='Enter your request here'
+                        style={{ width: '100%', height: '150px' }}
                     ></textarea>
                 </div>
+
                 <div className='form-group submit-btn'>
                     <input type='submit' value='Submit' />
                 </div>
-                {document.getElementById('time') && callUpdateTime()}
             </form>
         </div>
     );
