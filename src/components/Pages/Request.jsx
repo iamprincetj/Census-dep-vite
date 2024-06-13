@@ -33,10 +33,14 @@ const Request = () => {
   };
 
   return (
-    <div className="landing-page">
-      <form onSubmit={handleSubmit} style={{ marginTop: '' }}>
+   <div>
+      <form onSubmit={handleSubmit} style={{}}>
         <div className="hero-image">
-        <img src="https://i.pinimg.com/originals/d4/99/03/d49903fe1424194ee82d8720db09e154.jpg" alt="Census Data" />
+          <img
+            src="https://i.pinimg.com/736x/25/47/e4/2547e41487634d272a78471c0ae64121.jpg"
+            alt="Hero"
+            style={{ marginTop: '' }}
+          />
         </div><br />
         <div className="form-group">
           <label htmlFor="fullname">Full Name</label>
