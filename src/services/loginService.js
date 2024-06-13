@@ -14,3 +14,23 @@ export const changeCredential = async (data) => {
     const request = await axios.post(`${baseUrl}/login/change`, data, config);
     return request.data;
 };
+
+export const signup = async (data) => {
+    const response = await axios.post(`${baseUrl}/signup`, data);
+    return response.data;
+};
+
+export const getToken = async () => {
+    const request = await axios.get(`${baseUrl}/login/token`);
+    return request.data;
+};
+
+export const logout = async () => {
+    const { token } = await getToken();
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    await axios.post(`${baseUrl}/login/logout`, null, config);
+};

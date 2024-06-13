@@ -4,6 +4,7 @@ import formattedDate from '../../script2';
 import callUpdateTime, { updateTime } from '../../script3';
 import { makeRequest } from '../../services/requestService';
 import { getCurrentDate } from './date';
+import { getCurrentTime } from './time';
 
 const Request = () => {
     const [fullname, setFullname] = useState('');
@@ -36,7 +37,7 @@ const Request = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const time = updateTime();
+        const time = getCurrentTime();
 
         try {
             const data = {

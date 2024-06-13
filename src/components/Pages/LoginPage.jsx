@@ -2,22 +2,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
 import { useState } from 'react';
 import { login } from '../../services/loginService';
+import { Button } from 'react-bootstrap';
 
 const LoginPage = ({ setAdmin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
     const handleLogin = async (e) => {
         e.preventDefault();
         const data = {
             username,
             password,
         };
-        const request = await login(data);
-        console.log(JSON.parse(JSON.stringify(request)));
-        localStorage.setItem('loggedInUser', JSON.stringify(request));
-        setAdmin(request.username);
-        navigate('/admin');
+        try {
+            const request = await login(data);
+            localStorage.setItem('loggedInUser', JSON.stringify(request));
+            setAdmin(request.username);
+            navigate('/admin');
+        } catch (error) {
+            console.log(error.response.data.error);
+        }
     };
     return (
         <div className='form-container'>
@@ -45,6 +50,12 @@ const LoginPage = ({ setAdmin }) => {
                 </div>
                 <div className='form-group submit-btn'>
                     <input type='submit' value='Login' />
+                </div>
+                <div>
+                    No account?{' '}
+                    <Link to='/signup'>
+                        <Button>Signup</Button>
+                    </Link>
                 </div>
             </form>
         </div>

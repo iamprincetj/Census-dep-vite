@@ -17,29 +17,29 @@ function App() {
     const [admin, setAdmin] = useState(token?.username || null);
 
     return (
-        <Routes>
-            <Route path='/' element={<LandingLayout />} />
-            <Route
-                path='/admin'
-                exact
-                element={
-                    admin ? <FullLandingLayout /> : <Navigate to='/login' />
-                }
-            />
-            <Route element={<RoutedLayout />}>
-                <Route path='attendance' element={<Attendance />} />
-                <Route
-                    path='login'
-                    element={<LoginPage setAdmin={setAdmin} />}
-                />
-                <Route element={<Admin admin={admin} />}>
-                    <Route path='mail' element={<Mail />} />
-                    <Route path='request' element={<Request />} />
-                    <Route path='signup' element={<SignupPage />} />
-                    <Route path='dashboard' element={<Dashboard />} />
+        <div>
+            <Routes>
+                <Route path='/' element={<LandingLayout />} />
+                <Route path='signup' element={<SignupPage />} />
+                <Route element={<RoutedLayout />}>
+                    <Route path='attendance' element={<Attendance />} />
+                    <Route
+                        path='login'
+                        element={<LoginPage setAdmin={setAdmin} />}
+                    />
+                    <Route element={<Admin admin={admin} />}>
+                        <Route
+                            path='/admin'
+                            exact
+                            element={<FullLandingLayout />}
+                        />
+                        <Route path='mail' element={<Mail />} />
+                        <Route path='request' element={<Request />} />
+                        <Route path='dashboard' element={<Dashboard />} />
+                    </Route>
                 </Route>
-            </Route>
-        </Routes>
+            </Routes>
+        </div>
     );
 }
 

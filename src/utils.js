@@ -1,4 +1,4 @@
-export const baseUrl = 'http://localhost:3002/api';
+export const baseUrl = '/api';
 
 export const getTime = () => {
     const now = new Date();
